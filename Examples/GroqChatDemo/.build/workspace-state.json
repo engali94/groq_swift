@@ -1,0 +1,24 @@
+{
+  "object" : {
+    "artifacts" : [
+
+    ],
+    "dependencies" : [
+      {
+        "basedOn" : null,
+        "packageRef" : {
+          "identity" : "groq_swift",
+          "kind" : "fileSystem",
+          "location" : "/Users/alihilal/Documents/Per/groq_swift",
+          "name" : "groq_swift"
+        },
+        "state" : {
+          "name" : "fileSystem",
+          "path" : "/Users/alihilal/Documents/Per/groq_swift"
+        },
+        "subpath" : "groq_swift"
+      }
+    ]
+  },
+  "version" : 6
+}

@@ -1,0 +1,4 @@
+module GroqSwift {
+    header "/Users/alihilal/Documents/Per/groq_swift/Examples/GroqChatDemo/.build/arm64-apple-macosx/debug/GroqSwift.build/GroqSwift-Swift.h"
+    requires objc
+}
