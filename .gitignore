@@ -7,4 +7,4 @@ DerivedData/
 .swiftpm/
 Package.resolved
 
-Examples/GroqChatDemo/GroqChatDemo/Models/APIKEY.swift
+Examples/GroqChatDemo/GroqChatDemo/APIKEY.swift
