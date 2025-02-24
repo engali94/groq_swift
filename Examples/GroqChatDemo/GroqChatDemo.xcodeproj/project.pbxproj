@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CB54EC42D6CFC51007DD4A0 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54EC32D6CFC51007DD4A0 /* MessageView.swift */; };
+		0CB54EC72D6CFC70007DD4A0 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54EC62D6CFC70007DD4A0 /* ChatMessage.swift */; };
+		0CB54EC92D6CFC84007DD4A0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54EC82D6CFC84007DD4A0 /* Theme.swift */; };
+		0CB54ECB2D6CFC9D007DD4A0 /* GroqModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ECA2D6CFC9D007DD4A0 /* GroqModel.swift */; };
+		0CB54ECD2D6CFCB2007DD4A0 /* ChatSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ECC2D6CFCB2007DD4A0 /* ChatSettings.swift */; };
+		0CB54ECF2D6CFCCC007DD4A0 /* ChatSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ECE2D6CFCCC007DD4A0 /* ChatSettingsView.swift */; };
+		0CB54ED22D6CFCFF007DD4A0 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ED12D6CFCFF007DD4A0 /* ChatViewModel.swift */; };
+		0CB54ED42D6CFD25007DD4A0 /* ModelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ED32D6CFD25007DD4A0 /* ModelPickerView.swift */; };
+		0CB54ED62D6CFD39007DD4A0 /* ThemePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ED52D6CFD39007DD4A0 /* ThemePickerView.swift */; };
+		0CB54ED82D6CFEAF007DD4A0 /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB54ED72D6CFEAF007DD4A0 /* APIKEY.swift */; };
+		8A1234561234567800000001 /* GroqChatDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1234571234567800000002 /* GroqChatDemoApp.swift */; };
+		8A1234581234567800000003 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1234591234567800000004 /* ContentView.swift */; };
+		8A1234601234567800000005 /* GroqSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8A1234611234567800000006 /* GroqSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CB54EC32D6CFC51007DD4A0 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		0CB54EC62D6CFC70007DD4A0 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		0CB54EC82D6CFC84007DD4A0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0CB54ECA2D6CFC9D007DD4A0 /* GroqModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqModel.swift; sourceTree = "<group>"; };
+		0CB54ECC2D6CFCB2007DD4A0 /* ChatSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettings.swift; sourceTree = "<group>"; };
+		0CB54ECE2D6CFCCC007DD4A0 /* ChatSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingsView.swift; sourceTree = "<group>"; };
+		0CB54ED12D6CFCFF007DD4A0 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		0CB54ED32D6CFD25007DD4A0 /* ModelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPickerView.swift; sourceTree = "<group>"; };
+		0CB54ED52D6CFD39007DD4A0 /* ThemePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePickerView.swift; sourceTree = "<group>"; };
+		0CB54ED72D6CFEAF007DD4A0 /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		8A1234571234567800000002 /* GroqChatDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroqChatDemoApp.swift; sourceTree = "<group>"; };
+		8A1234591234567800000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8A1234621234567800000007 /* GroqChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GroqChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8A1234631234567800000008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A1234601234567800000005 /* GroqSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CB54EC22D6CFC49007DD4A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0CB54ED32D6CFD25007DD4A0 /* ModelPickerView.swift */,
+				0CB54ECE2D6CFCCC007DD4A0 /* ChatSettingsView.swift */,
+				0CB54EC32D6CFC51007DD4A0 /* MessageView.swift */,
+				8A1234591234567800000004 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0CB54EC52D6CFC6D007DD4A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0CB54ED52D6CFD39007DD4A0 /* ThemePickerView.swift */,
+				0CB54ECC2D6CFCB2007DD4A0 /* ChatSettings.swift */,
+				0CB54ECA2D6CFC9D007DD4A0 /* GroqModel.swift */,
+				0CB54EC82D6CFC84007DD4A0 /* Theme.swift */,
+				0CB54EC62D6CFC70007DD4A0 /* ChatMessage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0CB54ED02D6CFCF2007DD4A0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0CB54ED12D6CFCFF007DD4A0 /* ChatViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8A1234641234567800000009 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8A1234621234567800000007 /* GroqChatDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8A1234651234567800000010 /* GroqChatDemo */ = {
+			isa = PBXGroup;
+			children = (
+				0CB54ED72D6CFEAF007DD4A0 /* APIKEY.swift */,
+				0CB54ED02D6CFCF2007DD4A0 /* ViewModels */,
+				0CB54EC52D6CFC6D007DD4A0 /* Models */,
+				0CB54EC22D6CFC49007DD4A0 /* Views */,
+				8A1234571234567800000002 /* GroqChatDemoApp.swift */,
+			);
+			path = GroqChatDemo;
+			sourceTree = "<group>";
+		};
+		8A1234661234567800000011 = {
+			isa = PBXGroup;
+			children = (
+				8A1234651234567800000010 /* GroqChatDemo */,
+				8A1234641234567800000009 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8A1234671234567800000012 /* GroqChatDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A1234681234567800000013 /* Build configuration list for PBXNativeTarget "GroqChatDemo" */;
+			buildPhases = (
+				8A1234691234567800000014 /* Sources */,
+				8A1234631234567800000008 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GroqChatDemo;
+			packageProductDependencies = (
+				8A1234611234567800000006 /* GroqSwift */,
+			);
+			productName = GroqChatDemo;
+			productReference = 8A1234621234567800000007 /* GroqChatDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8A12346A1234567800000015 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					8A1234671234567800000012 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 8A12346B1234567800000016 /* Build configuration list for PBXProject "GroqChatDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8A1234661234567800000011;
+			packageReferences = (
+				8A12346C1234567800000017 /* XCLocalSwiftPackageReference "../.." */,
+			);
+			productRefGroup = 8A1234641234567800000009 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8A1234671234567800000012 /* GroqChatDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8A1234691234567800000014 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0CB54ED42D6CFD25007DD4A0 /* ModelPickerView.swift in Sources */,
+				0CB54ECD2D6CFCB2007DD4A0 /* ChatSettings.swift in Sources */,
+				0CB54EC42D6CFC51007DD4A0 /* MessageView.swift in Sources */,
+				0CB54EC72D6CFC70007DD4A0 /* ChatMessage.swift in Sources */,
+				0CB54ECB2D6CFC9D007DD4A0 /* GroqModel.swift in Sources */,
+				0CB54ED62D6CFD39007DD4A0 /* ThemePickerView.swift in Sources */,
+				0CB54ED82D6CFEAF007DD4A0 /* APIKEY.swift in Sources */,
+				0CB54EC92D6CFC84007DD4A0 /* Theme.swift in Sources */,
+				0CB54ECF2D6CFCCC007DD4A0 /* ChatSettingsView.swift in Sources */,
+				8A1234581234567800000003 /* ContentView.swift in Sources */,
+				0CB54ED22D6CFCFF007DD4A0 /* ChatViewModel.swift in Sources */,
+				8A1234561234567800000001 /* GroqChatDemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		8A12346D1234567800000018 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8A12346E1234567800000019 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8A12346F1234567800000020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GroqChatDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A1234701234567800000021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.GroqChatDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A1234681234567800000013 /* Build configuration list for PBXNativeTarget "GroqChatDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A12346F1234567800000020 /* Debug */,
+				8A1234701234567800000021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8A12346B1234567800000016 /* Build configuration list for PBXProject "GroqChatDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A12346D1234567800000018 /* Debug */,
+				8A12346E1234567800000019 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8A12346C1234567800000017 /* XCLocalSwiftPackageReference "../.." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8A1234611234567800000006 /* GroqSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GroqSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 8A12346A1234567800000015 /* Project object */;
+}
