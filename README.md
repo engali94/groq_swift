@@ -6,7 +6,7 @@ A Swift SDK for the Groq API, providing a convenient way to interact with Groq's
 
 Here's a demo chat application built using GroqSwift:
 
-<img src="Examples/GroqChatDemo/GroqChatDemo/Screenshots/1.png" width="250" alt="Demo Image 1"> <img src="Examples/GroqChatDemo/GroqChatDemo/Screenshots/2.png" width="250" alt="Demo Image 2"> <img src="Examples/GroqChatDemo/GroqChatDemo/Screenshots/3.png" width="250" alt="Demo Image 3">
+<img src="Examples/Resources/1.png" width="250" alt="Demo Image 1"> <img src="Examples/Resources/2.png" width="250" alt="Demo Image 2"> <img src="Examples/Resources/3.png" width="250" alt="Demo Image 3">
 
 ## Features
 
