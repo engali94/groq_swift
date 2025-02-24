@@ -1,5 +1,5 @@
 import Foundation
-
+// swiftlint:disable file_length
 /// A chat message with a role and content.
 public struct Message: Codable {
     /// The role of the message sender (e.g., "system", "user", "assistant")
@@ -537,3 +537,4 @@ public enum JSONValue: Codable {
         }
     }
 }
+// swiftlint:enable file_length

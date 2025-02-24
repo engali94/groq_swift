@@ -9,8 +9,10 @@ import Foundation
 /// It supports both regular and streaming completions, with proper error handling and Linux compatibility.
 @MainActor
 public final class GroqClient: Sendable {
+    // swiftlint:disable force_unwrapping
     /// The default host URL for the Groq API.
     public static nonisolated let defaultHost = URL(string: "https://api.groq.com/openai/v1")!
+    // swiftlint:enable force_unwrapping
 
     private let apiKey: String
     private let host: URL
@@ -32,7 +34,7 @@ public final class GroqClient: Sendable {
     }
 
     private func headers() -> [String: String] {
-        return [
+        [
             "Content-Type": "application/json",
             "Authorization": "Bearer \(apiKey)"
         ]
@@ -83,9 +85,10 @@ public final class GroqClient: Sendable {
     /// - Returns: A response containing the generated completion
     /// - Throws: `GroqError` if the request fails or the response is invalid
     public func createChatCompletion(_ request: ChatCompletionRequest) async throws -> ChatCompletionResponse {
-        return try await fetch("POST", "/chat/completions", params: request.dictionary)
+        try await fetch("POST", "/chat/completions", params: request.dictionary)
     }
 
+    // swiftlint:disable function_body_length
     /// Creates a streaming chat completion that yields responses as they become available.
     ///
     /// - Parameter request: The chat completion request containing the messages and model configuration
@@ -167,6 +170,8 @@ public final class GroqClient: Sendable {
             }
         }
     }
+
+    // swiftlint:enable function_body_length
 
     private func createURLRequest(for request: ChatCompletionRequest) async throws -> URLRequest {
         var urlComponents = URLComponents(url: host, resolvingAgainstBaseURL: true)

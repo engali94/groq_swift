@@ -118,6 +118,7 @@
 			buildPhases = (
 				8A1234691234567800000014 /* Sources */,
 				8A1234631234567800000008 /* Frameworks */,
+				0CB54ED92D6D1301007DD4A0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -166,6 +167,26 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CB54ED92D6D1301007DD4A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nswiftlint\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A1234691234567800000014 /* Sources */ = {

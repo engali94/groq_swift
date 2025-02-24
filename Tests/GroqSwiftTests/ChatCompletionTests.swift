@@ -1,6 +1,7 @@
 import XCTest
 @testable import GroqSwift
 
+// swiftlint:disable all
 final class ChatCompletionTests: XCTestCase {
 
     override func setUp() {
@@ -118,3 +119,5 @@ final class ChatCompletionTests: XCTestCase {
         }
     }
 }
+
+// swiftlint:enable all

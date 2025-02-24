@@ -72,7 +72,10 @@ cyclomatic_complexity:
 
 included:
   - Sources
+
+excluded:
   - Tests
+  - Examples
 
 analyzer_rules:
   - explicit_self
