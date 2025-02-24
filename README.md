@@ -1,5 +1,8 @@
 # GroqSwift
 
+[![CI](https://github.com/engali94/groq_swift/actions/workflows/ci.yml/badge.svg)](https://github.com/engali94/groq_swift/actions/workflows/ci.yml)
+[![Documentation](https://img.shields.io/badge/docs-github.io-blue.svg)](https://engali94.github.io/groq_swift/documentation/groqswift/)
+
 A Swift SDK for the Groq API, providing a convenient way to interact with Groq's language models in Swift applications. The SDK is designed to work on both Apple platforms and Linux.
 
 ## Demo App
