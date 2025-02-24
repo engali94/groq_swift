@@ -3,6 +3,8 @@
 [![CI](https://github.com/engali94/groq_swift/actions/workflows/ci.yml/badge.svg)](https://github.com/engali94/groq_swift/actions/workflows/ci.yml)
 [![Documentation](https://img.shields.io/badge/docs-github.io-blue.svg)](https://engali94.github.io/groq_swift/documentation/groqswift/)
 
+> ⚠️ This is a community-maintained library and is not officially supported by Groq.
+
 A Swift SDK for the Groq API, providing a convenient way to interact with Groq's language models in Swift applications. The SDK is designed to work on both Apple platforms and Linux.
 
 ## Demo App
@@ -34,23 +36,23 @@ dependencies: [
 
 ## Quick Start
 
+Please ensure you have set the `GROQ_API_KEY` environment variable, before running the following code, 
+please DON'T store API key in code.
+
 ```swift
 import GroqSwift
 
-// Initialize the client
-let client = GroqClient(apiKey: "your-api-key")
+let apiKey = ProcessInfo.processInfo.environment["GROQ_API_KEY"] ?? ""
+let client = GroqClient(apiKey: apiKey)
 
-// Create a chat completion request
 let request = ChatCompletionRequest(
-    model: .mixtral8x7bChat, 
+    model: .mixtral8x7bChat,
     messages: [Message(role: .user, content: "What is the capital of France?")],
     temperature: 0.7
 )
 
-// Regular completion
-do {
-    let response = try await client.createChatCompletion(request)
-    print(response.choices.first?.message.content ?? "")
+let response = try await client.createChatCompletion(request)
+print(response.choices.first?.message.content ?? "")
 } catch {
     print("Error: \(error)")
 }
