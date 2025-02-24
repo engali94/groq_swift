@@ -9,26 +9,26 @@ struct ContentView: View {
     @State private var showThemePicker = false
     @State private var showSettings = false
     @AppStorage("chatSettings") private var chatSettings: ChatSettings = ChatSettings()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 selectedTheme.backgroundColor
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 0) {
                     HStack {
                         Text("Groq Chat")
                             .font(.title.bold())
-                        
+
                         Spacer()
-                        
+
                         Button {
                             showSettings = true
                         } label: {
                             Label("Settings", systemImage: "slider.horizontal.3")
                         }
-                        
+
                         Menu {
                             ThemePickerView(selectedTheme: $selectedTheme)
                             ModelPickerView(selectedModel: $selectedModel)
@@ -39,7 +39,7 @@ struct ContentView: View {
                         }
                     }
                     .padding()
-                    
+
                     chatListView
                     messageInputView
                 }
@@ -54,7 +54,7 @@ struct ContentView: View {
             ChatSettingsView(settings: $chatSettings)
         }
     }
-    
+
     private var chatListView: some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -78,12 +78,12 @@ struct ContentView: View {
             }
         }
     }
-    
+
     private var messageInputView: some View {
         VStack(spacing: 0) {
             Divider()
                 .background(selectedTheme.dividerColor)
-            
+
             HStack(spacing: 12) {
                 TextField("Message", text: $messageText, axis: .vertical)
                     .textFieldStyle(.plain)
@@ -96,7 +96,7 @@ struct ContentView: View {
                     }
                     .font(.body)
                     .lineLimit(1...5)
-                
+
                 Button(action: sendMessage) {
                     Image(systemName: viewModel.isLoading ? "stop.fill" : "arrow.up.circle.fill")
                         .font(.system(size: 32))
@@ -110,7 +110,7 @@ struct ContentView: View {
             .background(selectedTheme.bottomBarColor)
         }
     }
-    
+
     private func sendMessage() {
         if viewModel.isLoading {
             viewModel.cancelStreaming()

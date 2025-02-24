@@ -6,9 +6,9 @@ public struct Message: Codable {
     public let role: Role
     /// The content of the message
     public let content: String
-    
+
     /// Creates a new chat message.
-    /// 
+    ///
     /// - Parameters:
     ///   - role: The role of the message sender
     ///   - content: The content of the message
@@ -61,22 +61,22 @@ public struct ChatCompletionRequest: Codable {
     public let tools: [Tool]?
     /// Controls which tool is called by the model
     public let toolChoice: ToolChoice?
-    
+
     public struct StreamOptions: Codable {
         /// Whether to return intermediate responses as they become available
         public let intermediateResponses: Bool
-        
+
         public init(intermediateResponses: Bool = true) {
             self.intermediateResponses = intermediateResponses
         }
-        
+
         private enum CodingKeys: String, CodingKey {
             case intermediateResponses = "intermediate_responses"
         }
     }
-    
+
     /// Creates a new chat completion request.
-    /// 
+    ///
     /// - Parameters:
     ///   - model: The ID of the model to use
     ///   - messages: The messages to generate the completion for
@@ -132,29 +132,29 @@ public struct ChatCompletionRequest: Codable {
         self.tools = tools
         self.toolChoice = toolChoice
     }
-    
+
     public struct ResponseFormat: Codable {
         public let type: String
-        
+
         public init(type: String) {
             self.type = type
         }
     }
-    
+
     public struct Tool: Codable {
         public let type: String
         public let function: Function
-        
+
         public init(type: String, function: Function) {
             self.type = type
             self.function = function
         }
-        
+
         public struct Function: Codable {
             public let name: String
             public let description: String?
             public let parameters: [String: JSONValue]
-            
+
             public init(name: String, description: String? = nil, parameters: [String: JSONValue]) {
                 self.name = name
                 self.description = description
@@ -162,18 +162,18 @@ public struct ChatCompletionRequest: Codable {
             }
         }
     }
-    
+
     public enum ToolChoice: Codable {
         case none
         case auto
         case required
         case function(name: String)
-        
+
         private enum CodingKeys: String, CodingKey {
             case type
             case function
         }
-        
+
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             switch self {
@@ -189,7 +189,7 @@ public struct ChatCompletionRequest: Codable {
                 try functionContainer.encode(name, forKey: .type)
             }
         }
-        
+
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let type = try container.decode(String.self, forKey: .type)
@@ -209,7 +209,7 @@ public struct ChatCompletionRequest: Codable {
             }
         }
     }
-    
+
     private enum CodingKeys: String, CodingKey {
         case model
         case messages
@@ -229,7 +229,7 @@ public struct ChatCompletionRequest: Codable {
         case tools
         case toolChoice = "tool_choice"
     }
-    
+
     var dictionary: [String: JSONValue] {
         var dict: [String: JSONValue] = [
             "model": .string(model),
@@ -240,61 +240,61 @@ public struct ChatCompletionRequest: Codable {
                 ])
             })
         ]
-        
+
         if let stream = stream {
             dict["stream"] = .bool(stream)
         }
-        
+
         if let streamOptions = streamOptions {
             dict["stream_options"] = .object([
                 "intermediate_responses": .bool(streamOptions.intermediateResponses)
             ])
         }
-        
+
         if let maxCompletionTokens = maxCompletionTokens {
             dict["max_completion_tokens"] = .number(Double(maxCompletionTokens))
         }
-        
+
         if let temperature = temperature {
             dict["temperature"] = .number(temperature)
         }
-        
+
         if let topP = topP {
             dict["top_p"] = .number(topP)
         }
-        
+
         if let n = n {
             dict["n"] = .number(Double(n))
         }
-        
+
         if let stop = stop {
             dict["stop"] = .array(stop.map { .string($0) })
         }
-        
+
         if let presencePenalty = presencePenalty {
             dict["presence_penalty"] = .number(presencePenalty)
         }
-        
+
         if let frequencyPenalty = frequencyPenalty {
             dict["frequency_penalty"] = .number(frequencyPenalty)
         }
-        
+
         if let seed = seed {
             dict["seed"] = .number(Double(seed))
         }
-        
+
         if let responseFormat = responseFormat {
             dict["response_format"] = .object(["type": .string(responseFormat.type)])
         }
-        
+
         if let serviceTier = serviceTier {
             dict["service_tier"] = .string(serviceTier)
         }
-        
+
         if let user = user {
             dict["user"] = .string(user)
         }
-        
+
         if let tools = tools {
             dict["tools"] = .array(tools.map { tool in
                 .object([
@@ -307,7 +307,7 @@ public struct ChatCompletionRequest: Codable {
                 ])
             })
         }
-        
+
         if let toolChoice = toolChoice {
             switch toolChoice {
             case .none:
@@ -323,7 +323,7 @@ public struct ChatCompletionRequest: Codable {
                 ])
             }
         }
-        
+
         return dict
     }
 }
@@ -346,7 +346,7 @@ public struct ChatCompletionResponse: Codable {
     public let systemFingerprint: String?
     /// Additional information from Groq
     public let xGroq: XGroq?
-    
+
     /// A choice generated by the model.
     public struct Choice: Codable {
         /// The index of this choice
@@ -357,7 +357,7 @@ public struct ChatCompletionResponse: Codable {
         public let finishReason: String?
         /// Log probabilities for the generated tokens
         public let logprobs: LogProbs?
-        
+
         enum CodingKeys: String, CodingKey {
             case index
             case message
@@ -365,7 +365,7 @@ public struct ChatCompletionResponse: Codable {
             case logprobs
         }
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case object
@@ -394,7 +394,7 @@ public struct ChatCompletionChunkResponse: Codable {
     public let systemFingerprint: String?
     /// Additional information from Groq
     public let xGroq: XGroq?
-    
+
     /// A choice in a streaming response.
     public struct Choice: Codable {
         /// The index of this choice
@@ -405,7 +405,7 @@ public struct ChatCompletionChunkResponse: Codable {
         public let finishReason: String?
         /// Log probabilities for the generated tokens
         public let logprobs: LogProbs?
-        
+
         enum CodingKeys: String, CodingKey {
             case index
             case delta
@@ -413,13 +413,13 @@ public struct ChatCompletionChunkResponse: Codable {
             case logprobs
         }
     }
-    
+
     /// The delta containing the new content.
     public struct Delta: Codable {
         public let role: Role?
         public let content: String?
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case object
@@ -441,7 +441,7 @@ public struct XGroq: Codable {
 public struct LogProbs: Codable {
     /// Content of the log probabilities
     public let content: [String: Double]?
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if container.decodeNil() {
@@ -450,7 +450,7 @@ public struct LogProbs: Codable {
             content = try? container.decode([String: Double].self)
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(content)
@@ -473,7 +473,7 @@ public struct Usage: Codable {
     public let completionTime: Double?
     /// The total time the request took
     public let totalTime: Double?
-    
+
     enum CodingKeys: String, CodingKey {
         case promptTokens = "prompt_tokens"
         case completionTokens = "completion_tokens"
@@ -492,7 +492,7 @@ public enum JSONValue: Codable {
     case null
     case array([JSONValue])
     case object([String: JSONValue])
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
@@ -510,15 +510,15 @@ public enum JSONValue: Codable {
             try container.encode(object)
         }
     }
-    
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
+
         if container.decodeNil() {
             self = .null
             return
         }
-        
+
         if let bool = try? container.decode(Bool.self) {
             self = .bool(bool)
         } else if let string = try? container.decode(String.self) {

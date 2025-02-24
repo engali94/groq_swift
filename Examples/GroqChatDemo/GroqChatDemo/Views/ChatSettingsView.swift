@@ -10,7 +10,7 @@ import GroqSwift
 
 struct ChatSettingsView: View {
     @Binding var settings: ChatSettings
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -43,7 +43,7 @@ struct ChatSettingsView: View {
                     }
                     Text("What sampling temperature to use. Higher values make the output more random, lower values make it more focused.")
                 }
-                
+
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
@@ -55,7 +55,7 @@ struct ChatSettingsView: View {
                     }
                     Text("An alternative to sampling with temperature, called nucleus sampling. Only tokens with top_p probability mass are considered.")
                 }
-                
+
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
@@ -64,7 +64,7 @@ struct ChatSettingsView: View {
                             Text(String(format: "%.1f", settings.frequencyPenalty))
                         }
                         Slider(value: $settings.frequencyPenalty, in: -2...2, step: 0.1)
-                        
+
                         HStack {
                             Text("Presence Penalty")
                             Spacer()
@@ -74,14 +74,14 @@ struct ChatSettingsView: View {
                     }
                     Text("Positive values penalize new tokens based on their existing frequency in the text, decreasing the model's likelihood to repeat the same line.")
                 }
-                
+
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
                         Toggle("Limit Response Length", isOn: .init(
                             get: { settings.maxCompletionTokens != nil },
                             set: { if $0 { settings.maxCompletionTokens = 100 } else { settings.maxCompletionTokens = nil } }
                         ))
-                        
+
                         if settings.maxCompletionTokens != nil {
                             HStack {
                                 Text("Max Tokens")
@@ -94,12 +94,12 @@ struct ChatSettingsView: View {
                                 .keyboardType(.numberPad)
                             }
                         }
-                        
+
                         Toggle("Set Random Seed", isOn: .init(
                             get: { settings.seed != nil },
                             set: { if $0 { settings.seed = 42 } else { settings.seed = nil } }
                         ))
-                        
+
                         if settings.seed != nil {
                             HStack {
                                 Text("Seed")
@@ -115,7 +115,7 @@ struct ChatSettingsView: View {
                     }
                     Text("Max tokens limits response length. Seed enables deterministic responses.")
                 }
-                
+
                 Section {
                     ForEach(settings.stop.indices, id: \.self) { index in
                         TextField("Stop sequence", text: $settings.stop[index])
@@ -129,7 +129,7 @@ struct ChatSettingsView: View {
                         }
                     }
                 }
-                
+
                 Section {
                     Picker("Service Tier", selection: Binding(
                         get: { settings.serviceTier ?? "auto" },
@@ -140,14 +140,14 @@ struct ChatSettingsView: View {
                     }
                     Text("The service tier to use. Auto will automatically select the highest tier available within rate limits.")
                 }
-                
+
                 Section {
                     Toggle("JSON Response", isOn: Binding(
                         get: { settings.responseFormat != nil },
-                        set: { if $0 { 
-                            settings.responseFormat = .init(type: "json_object") 
-                        } else { 
-                            settings.responseFormat = nil 
+                        set: { if $0 {
+                            settings.responseFormat = .init(type: "json_object")
+                        } else {
+                            settings.responseFormat = nil
                         }}
                     ))
                     Text("Enable JSON mode to guarantee the message is valid JSON. Remember to instruct the model to produce JSON in your prompt.")

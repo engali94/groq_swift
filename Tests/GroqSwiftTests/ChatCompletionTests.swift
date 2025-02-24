@@ -2,14 +2,14 @@ import XCTest
 @testable import GroqSwift
 
 final class ChatCompletionTests: XCTestCase {
-   
+
     override func setUp() {
         super.setUp()
         MockURLProtocol.mockData = nil
         MockURLProtocol.mockResponse = nil
         MockURLProtocol.mockError = nil
     }
-    
+
     func testSuccessfulChatCompletion() async throws {
         let mockData = """
         {
@@ -38,11 +38,11 @@ final class ChatCompletionTests: XCTestCase {
             }
         }
         """
-        
+
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: configuration)
-        
+
         MockURLProtocol.mockData = mockData.data(using: .utf8)
         MockURLProtocol.mockResponse = HTTPURLResponse(
             url: URL(string: "https://api.groq.com/v1/chat/completions")!,
@@ -50,7 +50,7 @@ final class ChatCompletionTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )
-        
+
         let client = await GroqClient(apiKey: "test-key", session: session)
         let request = ChatCompletionRequest(
             model: "llama3-8b-8192",
@@ -58,9 +58,9 @@ final class ChatCompletionTests: XCTestCase {
                 Message(role: .user, content: "Tell me about fast language models")
             ]
         )
-        
+
         let response = try await client.createChatCompletion(request)
-        
+
         XCTAssertEqual(response.id, "chatcmpl-f51b2cd2-bef7-417e-964e-a08f0b513c22")
         XCTAssertEqual(response.choices.count, 1)
         XCTAssertEqual(response.choices[0].message.content, "This is a test response")
@@ -72,7 +72,7 @@ final class ChatCompletionTests: XCTestCase {
         XCTAssertEqual(response.usage?.completionTime, 0.463333333)
         XCTAssertEqual(response.usage?.totalTime, 0.464013927)
     }
-    
+
     func testErrorResponse() async throws {
         let errorJSON = """
         {
@@ -84,11 +84,11 @@ final class ChatCompletionTests: XCTestCase {
             }
         }
         """
-        
+
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let session = URLSession(configuration: configuration)
-        
+
         MockURLProtocol.mockData = errorJSON.data(using: .utf8)
         MockURLProtocol.mockResponse = HTTPURLResponse(
             url: URL(string: "https://api.groq.com/v1/chat/completions")!,
@@ -96,7 +96,7 @@ final class ChatCompletionTests: XCTestCase {
             httpVersion: nil,
             headerFields: nil
         )
-        
+
         let client = await GroqClient(apiKey: "invalid-key", session: session)
         let request = ChatCompletionRequest(
             model: "llama3-8b-8192",
@@ -104,7 +104,7 @@ final class ChatCompletionTests: XCTestCase {
                 Message(role: .user, content: "Test message")
             ]
         )
-        
+
         do {
             _ = try await client.createChatCompletion(request)
             XCTFail("Expected error but got success")

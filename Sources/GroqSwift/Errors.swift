@@ -4,37 +4,37 @@ import Foundation
 public enum GroqError: LocalizedError {
     /// Authentication failed (e.g., invalid API key)
     case authenticationFailed(String)
-    
+
     /// Rate limit exceeded
     case rateLimitExceeded(String)
-    
+
     /// Invalid request parameters
     case invalidRequest(String)
-    
+
     /// Model is currently overloaded with requests
     case modelOverloaded(String)
-    
+
     /// The requested model does not exist or is not available
     case modelNotFound(String)
-    
+
     /// Context length exceeded for the model
     case contextLengthExceeded(String)
-    
+
     /// Maximum tokens exceeded
     case maxTokensExceeded(String)
-    
+
     /// Invalid response format from the API
     case invalidResponse(String)
-    
+
     /// Network related errors
     case networkError(String)
-    
+
     /// Server returned an error
     case serverError(Int, String)
-    
+
     /// Unexpected error occurred
     case unexpected(String)
-    
+
     /// Invalid URL
     case invalidURL
 
@@ -66,7 +66,7 @@ public enum GroqError: LocalizedError {
             return "Invalid URL"
         }
     }
-    
+
     /// Helper method to convert HTTP status codes to appropriate GroqError types
     static func from(statusCode: Int, message: String) -> GroqError {
         switch statusCode {
@@ -96,16 +96,16 @@ public enum GroqError: LocalizedError {
 public enum StreamError: LocalizedError {
     /// Stream was cancelled by the client
     case cancelled
-    
+
     /// Stream connection was lost
     case connectionLost(String)
-    
+
     /// Invalid data received in stream
     case invalidData(String)
-    
+
     /// Stream ended unexpectedly
     case unexpectedEnd(String)
-    
+
     public var errorDescription: String? {
         switch self {
         case .cancelled:
@@ -124,22 +124,22 @@ public enum StreamError: LocalizedError {
 public enum ValidationError: LocalizedError {
     /// Temperature value is outside valid range (0...2)
     case invalidTemperature(Double)
-    
+
     /// Top P value is outside valid range (0...1)
     case invalidTopP(Double)
-    
+
     /// Presence penalty is outside valid range (-2...2)
     case invalidPresencePenalty(Double)
-    
+
     /// Frequency penalty is outside valid range (-2...2)
     case invalidFrequencyPenalty(Double)
-    
+
     /// Too many stop sequences (max 4)
     case tooManyStopSequences(Int)
-    
+
     /// Invalid model name
     case invalidModel(String)
-    
+
     public var errorDescription: String? {
         switch self {
         case .invalidTemperature(let value):

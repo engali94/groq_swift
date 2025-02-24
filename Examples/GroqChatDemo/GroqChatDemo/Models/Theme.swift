@@ -9,9 +9,9 @@ import SwiftUI
 
 enum Theme: String, CaseIterable, Identifiable {
     case modern, midnight, nature, sunset
-    
+
     var id: String { rawValue }
-    
+
     var name: String {
         switch self {
         case .modern: return "Modern"
@@ -20,7 +20,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return "Sunset"
         }
     }
-    
+
     var icon: String {
         switch self {
         case .modern: return "circle.hexagongrid.fill"
@@ -29,7 +29,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return "sun.horizon.fill"
         }
     }
-    
+
     var backgroundColor: Color {
         switch self {
         case .modern: return Color(.systemBackground)
@@ -38,7 +38,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color(.systemBackground).opacity(0.95)
         }
     }
-    
+
     var titleColor: Color {
         switch self {
         case .modern: return .primary
@@ -47,7 +47,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return .orange
         }
     }
-    
+
     var subtitleColor: Color {
         switch self {
         case .modern: return .secondary
@@ -56,7 +56,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return .orange.opacity(0.7)
         }
     }
-    
+
     var userBubbleColor: Color {
         switch self {
         case .modern: return .blue
@@ -65,7 +65,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return .orange
         }
     }
-    
+
     var assistantBubbleColor: Color {
         switch self {
         case .modern: return Color(.secondarySystemBackground)
@@ -74,10 +74,10 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.1)
         }
     }
-    
+
     var userTextColor: Color { .white }
     var assistantTextColor: Color { .primary }
-    
+
     var inputBackgroundColor: Color {
         switch self {
         case .modern: return Color(.secondarySystemBackground)
@@ -86,7 +86,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.1)
         }
     }
-    
+
     var inputBorderColor: Color {
         switch self {
         case .modern: return Color(.separator)
@@ -95,7 +95,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.3)
         }
     }
-    
+
     var bottomBarColor: Color {
         switch self {
         case .modern: return Color(.systemBackground)
@@ -104,7 +104,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color(.systemBackground)
         }
     }
-    
+
     var dividerColor: Color {
         switch self {
         case .modern: return Color(.separator)
@@ -113,7 +113,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.3)
         }
     }
-    
+
     var buttonEnabledColor: Color {
         switch self {
         case .modern: return .blue
@@ -122,7 +122,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return .orange
         }
     }
-    
+
     var buttonDisabledColor: Color {
         switch self {
         case .modern: return Color(.tertiaryLabel)
@@ -131,7 +131,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.5)
         }
     }
-    
+
     var userAvatarColor: Color {
         switch self {
         case .modern: return .blue.opacity(0.2)
@@ -140,7 +140,7 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return .orange.opacity(0.2)
         }
     }
-    
+
     var assistantAvatarColor: Color {
         switch self {
         case .modern: return Color(.secondarySystemBackground)
@@ -149,9 +149,9 @@ enum Theme: String, CaseIterable, Identifiable {
         case .sunset: return Color.orange.opacity(0.1)
         }
     }
-    
+
     var userAvatarIconColor: Color { userBubbleColor }
     var assistantAvatarIconColor: Color { .secondary }
-    
+
     var accentColor: Color { userBubbleColor }
 }

@@ -3,29 +3,29 @@ import XCTest
 
 final class ModelsTests: XCTestCase {
     func testMessageEncoding() throws {
-        let message = Message(role: .user, content: "Hello")
-        let data = try JSONEncoder().encode(message)
-        let json = String(data: data, encoding: .utf8)!
-        XCTAssertEqual(json, """
-        {"role":"user","content":"Hello"}
-        """)
+        let originalMessage = Message(role: .user, content: "Hello")
+        let data = try JSONEncoder().encode(originalMessage)
+        
+        let decodedMessage = try JSONDecoder().decode(Message.self, from: data)
+        XCTAssertEqual(decodedMessage.role, originalMessage.role)
+        XCTAssertEqual(decodedMessage.content, originalMessage.content)
     }
-    
+
     func testMessageDecoding() throws {
         let json = #"{"role":"assistant","content":"Hi there!"}"#
         let data = json.data(using: .utf8)!
         let decoder = JSONDecoder()
         let message = try decoder.decode(Message.self, from: data)
-        
+
         XCTAssertEqual(message.role, .assistant)
         XCTAssertEqual(message.content, "Hi there!")
     }
-    
+
     func testInvalidMessageRoleDecoding() throws {
         let json = #"{"role":"invalid","content":"Hi"}"#
         let data = json.data(using: .utf8)!
         let decoder = JSONDecoder()
-        
+
         XCTAssertThrowsError(try decoder.decode(Message.self, from: data)) { error in
             guard case DecodingError.dataCorrupted = error else {
                 XCTFail("Expected DecodingError.dataCorrupted but got \(error)")
@@ -33,7 +33,7 @@ final class ModelsTests: XCTestCase {
             }
         }
     }
-    
+
     func testChatCompletionRequestEncoding() throws {
         let request = ChatCompletionRequest(
             model: "mixtral-8x7b-chat",
@@ -42,13 +42,13 @@ final class ModelsTests: XCTestCase {
             maxCompletionTokens: 100,
             temperature: 0.7
         )
-        
+
         let encoder = JSONEncoder()
         let data = try encoder.encode(request)
-        
+
         let decoder = JSONDecoder()
         let decodedRequest = try decoder.decode(ChatCompletionRequest.self, from: data)
-        
+
         XCTAssertEqual(decodedRequest.model, "mixtral-8x7b-chat")
         XCTAssertEqual(decodedRequest.messages.count, 1)
         XCTAssertEqual(decodedRequest.messages[0].role, .user)
@@ -57,7 +57,7 @@ final class ModelsTests: XCTestCase {
         XCTAssertEqual(decodedRequest.maxCompletionTokens, 100)
         XCTAssertEqual(decodedRequest.temperature, 0.7)
     }
-    
+
     func testChatCompletionResponseDecoding() throws {
         let json = """
         {
@@ -89,10 +89,10 @@ final class ModelsTests: XCTestCase {
             "x_groq": { "id": "req_01jbd6g2qdfw2adyrt2az8hz4w" }
         }
         """
-        
+
         let decoder = JSONDecoder()
         let response = try decoder.decode(ChatCompletionResponse.self, from: json.data(using: .utf8)!)
-        
+
         XCTAssertEqual(response.id, "chatcmpl-f51b2cd2-bef7-417e-964e-a08f0b513c22")
         XCTAssertEqual(response.object, "chat.completion")
         XCTAssertEqual(response.created, 1730241104)

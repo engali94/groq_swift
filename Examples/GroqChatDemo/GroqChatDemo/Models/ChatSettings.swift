@@ -22,7 +22,7 @@ struct ChatSettings: RawRepresentable {
     var user: String?
     var stream: Bool = true
     var streamOptions: ChatCompletionRequest.StreamOptions?
-    
+
     private struct Storage: Codable {
         var temperature: Double
         var topP: Double
@@ -38,7 +38,7 @@ struct ChatSettings: RawRepresentable {
         var stream: Bool
         var streamOptions: ChatCompletionRequest.StreamOptions?
     }
-    
+
     var rawValue: String {
         let storage = Storage(
             temperature: temperature,
@@ -61,7 +61,7 @@ struct ChatSettings: RawRepresentable {
         }
         return string
     }
-    
+
     init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),
               let storage = try? JSONDecoder().decode(Storage.self, from: data) else {
@@ -81,7 +81,7 @@ struct ChatSettings: RawRepresentable {
         self.stream = storage.stream
         self.streamOptions = storage.streamOptions
     }
-    
+
     init() {
         self.temperature = 1.0
         self.topP = 1.0
@@ -92,7 +92,7 @@ struct ChatSettings: RawRepresentable {
         self.stream = true
         self.streamOptions = ChatCompletionRequest.StreamOptions(intermediateResponses: true)
     }
-    
+
     var asRequest: ChatCompletionRequest {
         ChatCompletionRequest(
             model: "",  // Set later

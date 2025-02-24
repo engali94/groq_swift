@@ -10,7 +10,7 @@ import SwiftUI
 struct ModelPickerView: View {
     @Binding var selectedModel: GroqModel
     @State private var showModelDetails = false
-    
+
     var body: some View {
         Menu {
             Button {
@@ -18,15 +18,15 @@ struct ModelPickerView: View {
             } label: {
                 Label("View All Models", systemImage: "list.bullet.rectangle.portrait")
             }
-            
+
             Divider()
-            
+
             Section("Production Models") {
                 ForEach(GroqModel.productionModels) { model in
                     modelButton(for: model)
                 }
             }
-            
+
             Section("Preview Models") {
                 ForEach(GroqModel.previewModels) { model in
                     modelButton(for: model)
@@ -44,7 +44,7 @@ struct ModelPickerView: View {
                             modelRow(for: model)
                         }
                     }
-                    
+
                     Section {
                         ForEach(GroqModel.previewModels) { model in
                             modelRow(for: model)
@@ -69,7 +69,7 @@ struct ModelPickerView: View {
             }
         }
     }
-    
+
     private func modelButton(for model: GroqModel) -> some View {
         Button {
             selectedModel = model
@@ -86,7 +86,7 @@ struct ModelPickerView: View {
             }
         }
     }
-    
+
     private func modelRow(for model: GroqModel) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -96,16 +96,16 @@ struct ModelPickerView: View {
                     Text(model.name)
                         .font(.headline)
                 }
-                
+
                 if let context = model.contextWindow {
                     Text("Context: \(context/1000)K tokens")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
-            
+
             Spacer()
-            
+
             if model == selectedModel {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundStyle(.blue)

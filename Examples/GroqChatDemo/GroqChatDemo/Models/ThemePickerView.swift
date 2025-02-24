@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThemePickerView: View {
     @Binding var selectedTheme: Theme
-    
+
     var body: some View {
         Menu("Theme") {
             ForEach(Theme.allCases) { theme in

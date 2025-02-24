@@ -19,7 +19,7 @@ enum GroqModel: String, CaseIterable, Identifiable {
     case mixtral_8x7b_32768 = "mixtral-8x7b-32768"
     case whisper_large_v3 = "whisper-large-v3"
     case whisper_large_v3_turbo = "whisper-large-v3-turbo"
-    
+
     // Preview Models
     case qwen_2_5_coder_32b = "qwen-2.5-coder-32b"
     case qwen_2_5_32b = "qwen-2.5-32b"
@@ -31,9 +31,9 @@ enum GroqModel: String, CaseIterable, Identifiable {
     case llama_3_2_3b_preview = "llama-3.2-3b-preview"
     case llama_3_2_11b_vision_preview = "llama-3.2-11b-vision-preview"
     case llama_3_2_90b_vision_preview = "llama-3.2-90b-vision-preview"
-    
+
     var id: String { rawValue }
-    
+
     var name: String {
         switch self {
         case .distilWhisperLargeV3En: return "Distil Whisper Large V3 (EN)"
@@ -58,7 +58,7 @@ enum GroqModel: String, CaseIterable, Identifiable {
         case .llama_3_2_90b_vision_preview: return "LLaMA 3.2 90B Vision Preview"
         }
     }
-    
+
     var icon: String {
         switch self {
         case .distilWhisperLargeV3En, .whisper_large_v3, .whisper_large_v3_turbo:
@@ -71,7 +71,7 @@ enum GroqModel: String, CaseIterable, Identifiable {
             return "cpu.fill"
         }
     }
-    
+
     var isPreview: Bool {
         switch self {
         case .qwen_2_5_coder_32b, .qwen_2_5_32b,
@@ -84,7 +84,7 @@ enum GroqModel: String, CaseIterable, Identifiable {
             return false
         }
     }
-    
+
     var contextWindow: Int? {
         switch self {
         case .gemma2_9b_it, .llama_guard_3_8b,
@@ -104,11 +104,11 @@ enum GroqModel: String, CaseIterable, Identifiable {
             return nil
         }
     }
-    
+
     static var productionModels: [GroqModel] {
         allCases.filter { !$0.isPreview }
     }
-    
+
     static var previewModels: [GroqModel] {
         allCases.filter { $0.isPreview }
     }

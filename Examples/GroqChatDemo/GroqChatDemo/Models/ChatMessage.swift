@@ -12,7 +12,7 @@ struct ChatMessage: Identifiable, Equatable {
     var content: String
     var isUser: Bool
     var isStreaming: Bool
-    
+
     init(id: UUID = UUID(), content: String, isUser: Bool, isStreaming: Bool = false) {
         self.id = id
         self.content = content
