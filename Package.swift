@@ -16,11 +16,14 @@ let package = Package(
             name: "GroqSwift",
             targets: ["GroqSwift"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
+    ],
     targets: [
         .target(
             name: "GroqSwift",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "GroqSwiftTests",
             dependencies: ["GroqSwift"]),
