@@ -1,6 +1,14 @@
 // swift-tools-version: 5.9
 import PackageDescription
 
+#if os(Linux)
+let swiftLintPlugin: [Target.PluginUsage] = []
+#else
+let swiftLintPlugin: [Target.PluginUsage] = [
+    .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
+]
+#endif
+
 let package = Package(
     name: "GroqSwift",
     platforms: [
@@ -24,9 +32,7 @@ let package = Package(
         .target(
             name: "GroqSwift",
             dependencies: [],
-            plugins: [
-                .plugin(name: "SwiftLint", package: "SwiftLintPlugin")
-            ]
+            plugins: swiftLintPlugin
         ),
         .testTarget(
             name: "GroqSwiftTests",
