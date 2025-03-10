@@ -97,62 +97,82 @@ public final class GroqClient: Sendable {
     public func createStreamingChatCompletion(_ request: ChatCompletionRequest) -> AsyncThrowingStream<ChatCompletionChunkResponse, Error> {
         #if canImport(FoundationNetworking)
         // Linux implementation using our custom stream function
-        do {
-            var streamRequest = request
-            streamRequest.stream = true
-            
-            let urlRequest = try createURLRequest(for: streamRequest)
-            let decoder = JSONDecoder()
-            
-            return session.stream(
-                request: urlRequest,
-                with: ChatCompletionChunkResponse.self,
-                decoder: decoder,
-                validate: { response in
-                    guard let httpResponse = response as? HTTPURLResponse else {
-                        throw GroqError.invalidResponse("Stream request failed")
+        return AsyncThrowingStream { continuation in
+            Task {
+                do {
+                    var streamRequest = request
+                    streamRequest.stream = true
+                    
+                    // Create the URL request synchronously
+                    var urlComponents = URLComponents(url: host, resolvingAgainstBaseURL: true)
+                    urlComponents?.path += "/chat/completions"
+                    
+                    guard let url = urlComponents?.url else {
+                        throw GroqError.invalidURL
                     }
                     
-                    if httpResponse.statusCode != 200 {
-                        throw GroqError.from(statusCode: httpResponse.statusCode, message: "Stream request failed")
-                    }
-                },
-                extractNextJSON: { buffer in
-                    // Look for SSE data: format
-                    var startIndex = buffer.startIndex
-                    while startIndex < buffer.endIndex {
-                        // Look for newlines
-                        if let newlineRange = buffer[startIndex...].firstRange(of: Data("\n".utf8)) {
-                            let lineData = buffer[startIndex..<newlineRange.lowerBound]
-                            startIndex = newlineRange.upperBound
-                            
-                            // Check if line starts with "data: "
-                            let dataPrefix = Data("data: ".utf8)
-                            if lineData.count > dataPrefix.count, 
-                               lineData.starts(with: dataPrefix) {
-                                let jsonData = lineData.dropFirst(dataPrefix.count)
-                                let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
-                                
-                                // Skip empty lines and [DONE] marker
-                                if jsonString.trimmingCharacters(in: .whitespaces).isEmpty ||
-                                   jsonString.trimmingCharacters(in: .whitespaces) == "[DONE]" {
-                                    continue
-                                }
-                                
-                                // Remove the processed data from the buffer
-                                buffer.removeSubrange(buffer.startIndex..<startIndex)
-                                return jsonData
+                    var urlRequest = URLRequest(url: url)
+                    urlRequest.httpMethod = "POST"
+                    urlRequest.allHTTPHeaderFields = headers()
+                    urlRequest.httpBody = try JSONEncoder().encode(streamRequest)
+                    
+                    let decoder = JSONDecoder()
+                    
+                    let stream = session.stream(
+                        request: urlRequest,
+                        with: ChatCompletionChunkResponse.self,
+                        decoder: decoder,
+                        validate: { response in
+                            guard let httpResponse = response as? HTTPURLResponse else {
+                                throw GroqError.invalidResponse("Stream request failed")
                             }
-                        } else {
-                            break // No more newlines
+                            
+                            if httpResponse.statusCode != 200 {
+                                throw GroqError.from(statusCode: httpResponse.statusCode, message: "Stream request failed")
+                            }
+                        },
+                        extractNextJSON: { buffer in
+                            // Look for SSE data: format
+                            var startIndex = buffer.startIndex
+                            while startIndex < buffer.endIndex {
+                                // Look for newlines
+                                if let newlineRange = buffer[startIndex...].firstRange(of: Data("\n".utf8)) {
+                                    let lineData = buffer[startIndex..<newlineRange.lowerBound]
+                                    startIndex = newlineRange.upperBound
+                                    
+                                    // Check if line starts with "data: "
+                                    let dataPrefix = Data("data: ".utf8)
+                                    if lineData.count > dataPrefix.count, 
+                                       lineData.starts(with: dataPrefix) {
+                                        let jsonData = lineData.dropFirst(dataPrefix.count)
+                                        let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+                                        
+                                        // Skip empty lines and [DONE] marker
+                                        if jsonString.trimmingCharacters(in: .whitespaces).isEmpty ||
+                                           jsonString.trimmingCharacters(in: .whitespaces) == "[DONE]" {
+                                            continue
+                                        }
+                                        
+                                        // Remove the processed data from the buffer
+                                        buffer.removeSubrange(buffer.startIndex..<startIndex)
+                                        return jsonData
+                                    }
+                                } else {
+                                    break // No more newlines
+                                }
+                            }
+                            return nil
                         }
+                    )
+                    
+                    for try await response in stream {
+                        continuation.yield(response)
                     }
-                    return nil
+                    
+                    continuation.finish()
+                } catch {
+                    continuation.finish(throwing: error)
                 }
-            )
-        } catch {
-            return AsyncThrowingStream { continuation in
-                continuation.finish(throwing: error)
             }
         }
         #else

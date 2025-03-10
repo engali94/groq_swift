@@ -34,7 +34,7 @@ extension URLSession {
                 let delegate = StreamingDelegate(
                     urlResponseCallback: { response in
                         do {
-                            try validate(response: response)
+                            try validate(response)
                         } catch {
                             continuation.finish(throwing: error)
                         }
