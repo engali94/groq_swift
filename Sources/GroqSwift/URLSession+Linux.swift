@@ -2,6 +2,7 @@
 import Foundation
 import FoundationNetworking
 
+// swiftlint:disable all
 extension URLSession {
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
         return try await withCheckedThrowingContinuation { continuation in

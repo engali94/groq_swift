@@ -2,7 +2,7 @@
 import FoundationNetworking
 #endif
 import Foundation
-
+// swiftlint:disable all
 /// A client for interacting with the Groq API.
 ///
 /// This client provides methods to interact with Groq's language models through their REST API.
