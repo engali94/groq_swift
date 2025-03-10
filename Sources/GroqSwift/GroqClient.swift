@@ -95,6 +95,68 @@ public final class GroqClient: Sendable {
     /// - Returns: An async stream of completion responses
     /// - Note: The stream will automatically end when the completion is finished or if an error occurs
     public func createStreamingChatCompletion(_ request: ChatCompletionRequest) -> AsyncThrowingStream<ChatCompletionChunkResponse, Error> {
+        #if canImport(FoundationNetworking)
+        // Linux implementation using our custom stream function
+        do {
+            var streamRequest = request
+            streamRequest.stream = true
+            
+            let urlRequest = try createURLRequest(for: streamRequest)
+            let decoder = JSONDecoder()
+            
+            return session.stream(
+                request: urlRequest,
+                with: ChatCompletionChunkResponse.self,
+                decoder: decoder,
+                validate: { response in
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        throw GroqError.invalidResponse("Stream request failed")
+                    }
+                    
+                    if httpResponse.statusCode != 200 {
+                        throw GroqError.from(statusCode: httpResponse.statusCode, message: "Stream request failed")
+                    }
+                },
+                extractNextJSON: { buffer in
+                    // Look for SSE data: format
+                    var startIndex = buffer.startIndex
+                    while startIndex < buffer.endIndex {
+                        // Look for newlines
+                        if let newlineRange = buffer[startIndex...].firstRange(of: Data("\n".utf8)) {
+                            let lineData = buffer[startIndex..<newlineRange.lowerBound]
+                            startIndex = newlineRange.upperBound
+                            
+                            // Check if line starts with "data: "
+                            let dataPrefix = Data("data: ".utf8)
+                            if lineData.count > dataPrefix.count, 
+                               lineData.starts(with: dataPrefix) {
+                                let jsonData = lineData.dropFirst(dataPrefix.count)
+                                let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+                                
+                                // Skip empty lines and [DONE] marker
+                                if jsonString.trimmingCharacters(in: .whitespaces).isEmpty ||
+                                   jsonString.trimmingCharacters(in: .whitespaces) == "[DONE]" {
+                                    continue
+                                }
+                                
+                                // Remove the processed data from the buffer
+                                buffer.removeSubrange(buffer.startIndex..<startIndex)
+                                return jsonData
+                            }
+                        } else {
+                            break // No more newlines
+                        }
+                    }
+                    return nil
+                }
+            )
+        } catch {
+            return AsyncThrowingStream { continuation in
+                continuation.finish(throwing: error)
+            }
+        }
+        #else
+        // Standard macOS/iOS implementation
         AsyncThrowingStream { continuation in
             Task {
                 do {
@@ -145,17 +207,12 @@ public final class GroqClient: Sendable {
                             currentLine = ""
 
                             if jsonString.trimmingCharacters(in: .whitespaces) == "[DONE]" {
-                                print("Received [DONE]")
                                 break
                             }
 
                             if let data = jsonString.data(using: .utf8) {
-                                print("Attempting to decode: \(jsonString)")
                                 if let response = try? decoder.decode(ChatCompletionChunkResponse.self, from: data) {
-                                    print("Successfully decoded response")
                                     continuation.yield(response)
-                                } else {
-                                    print("Failed to decode response")
                                 }
                             }
                         } else {
@@ -169,6 +226,7 @@ public final class GroqClient: Sendable {
                 }
             }
         }
+        #endif
     }
 
     // swiftlint:enable function_body_length
