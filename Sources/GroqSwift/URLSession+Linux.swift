@@ -61,7 +61,6 @@ extension URLSession {
                 task.delegate = delegate
 
                 continuation.onTermination = { terminationState in
-                    // Cancellation of our task should cancel the URLSessionDataTask
                     if case .cancelled = terminationState {
                         task.cancel()
                     }
